@@ -1,0 +1,42 @@
+# Secrets — never commit
+.ooi_env
+
+# Editor / OS / Claude
+.claude/
+.DS_Store
+__pycache__/
+*.pyc
+*.swp
+*.swo
+COSZO.code-workspace
+.idea/
+.vscode/
+
+# Generic file types we never want
+*.nc
+*.png
+*.svg
+
+# ── PREST-data-collection runtime ──────────────────────────────────────────
+
+# Logs (runtime stdout / append-only gap logs)
+PREST-data-collection/log/
+PREST-data-collection/log_mseed2dmc/
+
+# Output: keep dir, ignore contents (MiniSEEDs are not source-of-truth)
+PREST-data-collection/output/mseed/*
+!PREST-data-collection/output/mseed/.gitkeep
+PREST-data-collection/output/mseed2dmc/*
+!PREST-data-collection/output/mseed2dmc/.gitkeep
+
+# Output: never tracked (operator-generated, large, or generated locally)
+PREST-data-collection/output/temporal_anomaly/
+PREST-data-collection/output/xml/
+PREST-data-collection/output/netcdf/
+
+# Note: PREST-data-collection/output/metrics/ AND
+#       PREST-data-collection/output/diagnostics/ ARE tracked — that's the
+#       point of the daily sync_metrics.sh push to GitHub.
+
+# testk runtime output
+PREST-data-collection/testk/output/
