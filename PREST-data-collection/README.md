@@ -200,6 +200,68 @@ python bin/temporal_anomaly_investigator.py --mode collect \
     --start 2019-01-01 --end 2019-03-31 --save-nc --only-gaps
 ```
 
+#### Daily CSV schema
+
+Each fetched day appends one row to `output/temporal_anomaly/metrics/<STATION>_variability.csv`, keyed by `(station, date)`. `<STATION>` is the substring of the reference designator before the first `-`. When the fetch fails or returns fewer than 2 samples, `has_data` is `False` and the numeric columns are left blank.
+
+**Identity / coverage**
+
+| Column | Meaning |
+|---|---|
+| `date` | Day requested (`YYYY-MM-DD`, UTC) |
+| `station` | Full reference designator |
+| `deployment` | Deployment number active that day |
+| `has_data` | `False` if fetch failed or `<2` samples |
+| `data_start`, `data_end` | First / last UTC timestamp of the trimmed day (`YYYY-MM-DDTHH:MM:SSZ`) |
+
+**Sample counts**
+
+| Column | Meaning |
+|---|---|
+| `n_points` | Logged samples for the day |
+| `n_ideal` | `i_j[-1] + 1` — length of the reconstructed ideal sample index |
+| `true_missing` | `max(0, n_ideal − n_points)` — data‑derived missing‑sample count |
+| `sp_nominal` | Param‑file nominal sample period (reference only) |
+
+**Fitted sample interval**
+
+| Column | Meaning |
+|---|---|
+| `dt_FG` | Plain median of Δt'ⱼ (first‑guess interval) |
+| `dt_true` | OLS slope from `t'ⱼ = t_i0 + iⱼ · Δt_true + eⱼ` |
+| `t_i0_offset_s` | OLS intercept, in seconds relative to the first sample |
+
+**Gaps** — raw counts every `Δiⱼ > 1` event; corrected counts collapse to zero on days where wall‑clock reconstruction shows no missing samples.
+
+| Column | Meaning |
+|---|---|
+| `n_gaps_raw`, `gap_total_missing_raw` | All `Δiⱼ > 1` events and their summed missing samples |
+| `n_gaps`, `gap_total_missing` | Same, but zeroed when `true_missing == 0` (event reclassified as jitter) |
+
+**Jitter — residuals eⱼ in ms**
+
+| Column | Meaning |
+|---|---|
+| `jitter_mean_ms` | mean(eⱼ) |
+| `jitter_std_ms` | σ(eⱼ) |
+| `jitter_maxabs_ms` | max\|eⱼ\| |
+
+**Jitter — as fraction of Δt_true** (`fⱼ = eⱼ / Δt_true`)
+
+| Column | Meaning |
+|---|---|
+| `frac_mean`, `frac_std`, `frac_maxabs` | mean, σ, and max\|·\| of fⱼ |
+
+**Diagnostics**
+
+| Column | Meaning |
+|---|---|
+| `jitter_unstable` | `True` when `frac_maxabs > 0.4` — OLS Δt_true is unreliable that day |
+| `max_abs_epsilon` | `max\|Δi'ⱼ − round(Δi'ⱼ)\|` — integer‑step rounding sanity check |
+| `figure_generated` | Whether the per‑day 4‑panel PNG was written |
+
+Numeric rounding (see `_row_from_stats`): `sp_nominal` 6 dp; `dt_FG` / `dt_true` / `t_i0_offset_s` 9 dp; ms‑jitter stats 6 dp; fraction stats 6 significant figures; `max_abs_epsilon` 6 dp.
+
 ---
 
 ## Assumptions and Guarantees
