@@ -1,4 +1,4 @@
-# Tidal Seafloor Pressure
+# Absolute Seafloor Pressure
 
 Monorepo for the **PREST** instrument family (OOI Regional Cabled Array tidal seafloor pressure sensors) under the COSZO project.
 
