@@ -4,11 +4,28 @@ Monorepo for the **PREST** instrument family (OOI Regional Cabled Array tidal se
 
 ## Stations
 
-| Reference | Site | OO Net.Sta | Sample period |
+`DO` channels carry absolute pressure; paired `K1` channels carry the sensor's internal pressure-temperature reading. `_10` is the SEED location code.
+
+| Reference | Site | OO Net.Sta | Channels |
 |---|---|---|---|
-| `RS01SLBS-MJ01A-06-PRESTA101` | Slope Base, Hydrate Ridge | `OO.HYSB1` | 1 s (Dep 2), 15 s (Dep 1) |
-| `RS01SUM1-LJ01B-09-PRESTB102` | Southern Hydrate Summit 1 | `OO.HYS14` | 1 s (Dep 2), 15 s (Dep 1) |
-| `RS03AXBS-MJ03A-06-PRESTA301` | Axial Base | `OO.AXBA1` | 15 s (all 4 deployments) |
+| `RS01SLBS-MJ01A-06-PRESTA101` | Slope Base, Hydrate Ridge | `OO.HYSB1` | `UDO_10`, `UK1_10`, `LDO_10`, `LK1_10` |
+| `RS01SUM1-LJ01B-09-PRESTB102` | Southern Hydrate Summit 1 | `OO.HYS14` | `UDO_10`, `UK1_10`, `LDO_10`, `LK1_10` |
+| `RS03AXBS-MJ03A-06-PRESTA301` | Axial Base | `OO.AXBA1` | `UDO_10`, `UK1_10` |
+
+## Deployments
+
+Deployment history per station, with the channels active during each deployment and their nominal sample rate. Sourced from each channel's `c_start` / `c_end` in `PREST-data-collection/param/*_DO_10.txt`.
+
+| Station | Dep | Start | End | Channels | Sample rate |
+|---|---|---|---|---|---|
+| `OO.HYSB1` | 1 | 2014-09-13 | 2018-06-26 | `UDO_10`, `UK1_10` | 15 s (0.0667 Hz) |
+| `OO.HYSB1` | 2 | 2018-06-26 | ongoing | `LDO_10`, `LK1_10` | 1 s (1 Hz) |
+| `OO.HYS14` | 1 | 2014-09-07 | 2017-08-11 | `UDO_10`, `UK1_10` | 15 s (0.0667 Hz) |
+| `OO.HYS14` | 2 | 2017-08-11 | ongoing | `LDO_10`, `LK1_10` | 1 s (1 Hz) |
+| `OO.AXBA1` | 1 | 2014-08-08 | 2016-07-12 | `UDO_10`, `UK1_10` | 15 s (0.0667 Hz) |
+| `OO.AXBA1` | 2 | 2016-07-13 | 2020-08-05 | `UDO_10`, `UK1_10` | 15 s (0.0667 Hz) |
+| `OO.AXBA1` | 3 | 2020-08-06 | 2022-08-29 | `UDO_10`, `UK1_10` | 15 s (0.0667 Hz) |
+| `OO.AXBA1` | 4 | 2022-08-30 | ongoing | `UDO_10`, `UK1_10` | 15 s (0.0667 Hz) |
 
 ## Layout
 
