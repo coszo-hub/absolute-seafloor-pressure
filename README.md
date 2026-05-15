@@ -30,7 +30,7 @@ Deployment history per station, with the channels active during each deployment 
 ## Layout
 
 ```
-Tidal-Seafloor-Pressure/
+absolute-seafloor-pressure/
 ├── README.md
 ├── .gitignore
 └── PREST-data-collection/        ← pipeline code
@@ -103,7 +103,7 @@ The actual algorithm used per row is recorded in `pipeline_stats.csv` columns `a
 
 This monorepo covers PREST. Sibling instrument repos in the `coszo-hub` organization will follow the same internal layout:
 
-- `coszo-hub/Tidal-Seafloor-Pressure/PREST-data-collection/` (this repo)
+- `coszo-hub/absolute-seafloor-pressure/PREST-data-collection/` (this repo)
 - future: `coszo-hub/<current-meter>/...`
 - future: `coszo-hub/<scpr>/...`
 - future: `coszo-hub/<botpt>/...`
