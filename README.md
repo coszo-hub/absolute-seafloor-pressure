@@ -25,6 +25,48 @@ Deployment history per station, with the channels active during each deployment 
 | `OO.AXBA1` | 3 | 2020-08-06 | 2022-08-29 | `UDO_10`, `UK1_10` | 15 s (0.0667 Hz) |
 | `OO.AXBA1` | 4 | 2022-08-30 | ongoing | `UDO_10`, `UK1_10` | 15 s (0.0667 Hz) |
 
+## Data Access
+
+These stations are mirrored at the EarthScope/IRIS DMC, so raw waveforms are pulled
+through FDSN web services. The MDA metadata page for a channel (e.g.
+<https://ds.iris.edu/mda/OO/HYSB1/10/UDO/>) only shows what exists — the actual
+download happens via the endpoints below.
+
+### 1. FDSN `dataselect` web service (the raw HTTP way)
+
+Build a query against the dataselect endpoint with net/sta/loc/cha and a time
+window; the response is a miniSEED file. Paste into a browser or fetch with `curl`:
+
+```bash
+curl -o HYSB1_UDO.mseed \
+  "https://service.iris.edu/fdsnws/dataselect/1/query?net=OO&sta=HYSB1&loc=10&cha=UDO&starttime=2020-01-01T00:00:00&endtime=2020-01-02T00:00:00&format=miniseed&nodata=404"
+```
+
+### 2. ObsPy (the recommended programmatic way)
+
+```python
+from obspy.clients.fdsn import Client
+from obspy import UTCDateTime
+
+client = Client("IRIS")
+st = client.get_waveforms(
+    network="OO", station="HYSB1", location="10", channel="UDO",
+    starttime=UTCDateTime("2020-01-01"),
+    endtime=UTCDateTime("2020-01-02"),
+)
+st.write("HYSB1_UDO.mseed", format="MSEED")
+
+# metadata / instrument response:
+inv = client.get_stations(
+    network="OO", station="HYSB1", location="10", channel="UDO",
+    level="response",
+)
+```
+
+For long spans or many channels, use `client.get_waveforms_bulk()` or ObsPy's
+`MassDownloader`. If FDSN coverage has gaps, the OOI portal
+(<https://ooinet.oceanobservatories.org>) is the native-source fallback.
+
 ## Layout
 
 ```
