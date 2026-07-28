@@ -1,0 +1,466 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<FDSNStationXML xmlns="http://www.fdsn.org/xml/station/1" schemaVersion="1.2">
+  <Source>COSZO</Source>
+  <Module>ObsPy 1.5.0</Module>
+  <ModuleURI>https://www.obspy.org</ModuleURI>
+  <Created>2026-07-23T20:39:34.253846Z</Created>
+  <Network code="OO" startDate="2014-01-01T00:00:00.000000Z" restrictedStatus="open">
+    <Description>Ocean Observatories Initiative</Description>
+    <Station code="AXBA1" startDate="2014-08-08T16:39:00.000000Z" restrictedStatus="open">
+      <Latitude unit="DEGREES">45.820222</Latitude>
+      <Longitude unit="DEGREES">-129.736393</Longitude>
+      <Elevation unit="METERS">-2610.0</Elevation>
+      <Site>
+        <Name>RSN Axial Base 1</Name>
+      </Site>
+      <Channel code="UDO" startDate="2014-08-08T16:39:00.000000Z" endDate="2016-07-12T00:00:00.000000Z" locationCode="10">
+        <Description>absolute_pressure, Seafloor Pressure</Description>
+        <Comment>
+          <Value>ATAPL-67639-00003</Value>
+          <BeginEffectiveTime>2014-08-08T16:39:00.000000Z</BeginEffectiveTime>
+        </Comment>
+        <Latitude unit="DEGREES">45.820222</Latitude>
+        <Longitude unit="DEGREES">-129.736393</Longitude>
+        <Elevation unit="METERS">-2610.0</Elevation>
+        <Depth unit="METERS">0.0</Depth>
+        <Azimuth unit="DEGREES">0.0</Azimuth>
+        <SampleRate>0.066667</SampleRate>
+        <Sensor>
+          <Description>Tidal Seafloor Pressure (Tsunameter 6,000 psia): PREST Series A</Description>
+        </Sensor>
+        <Response>
+          <InstrumentSensitivity>
+            <Value>1.0</Value>
+            <Frequency>1.0</Frequency>
+            <InputUnits>
+              <Name>PA</Name>
+              <Description>pascal</Description>
+            </InputUnits>
+            <OutputUnits>
+              <Name>PA</Name>
+              <Description>pascal</Description>
+            </OutputUnits>
+          </InstrumentSensitivity>
+          <Stage number="1" resourceId="ATAPL-67639-00003">
+            <PolesZeros name="Stage01">
+              <InputUnits>
+                <Name>PA</Name>
+                <Description>pascal</Description>
+              </InputUnits>
+              <OutputUnits>
+                <Name>PA</Name>
+                <Description>pascal</Description>
+              </OutputUnits>
+              <PzTransferFunctionType>DIGITAL (Z-TRANSFORM)</PzTransferFunctionType>
+              <NormalizationFactor>1.0</NormalizationFactor>
+              <NormalizationFrequency unit="HERTZ">1.0</NormalizationFrequency>
+            </PolesZeros>
+            <Decimation>
+              <InputSampleRate unit="HERTZ">0.066667</InputSampleRate>
+              <Factor>1</Factor>
+              <Offset>0</Offset>
+              <Delay unit="HERTZ">0.0</Delay>
+              <Correction unit="HERTZ">0.0</Correction>
+            </Decimation>
+            <StageGain>
+              <Value>1.0</Value>
+              <Frequency>1.0</Frequency>
+            </StageGain>
+          </Stage>
+        </Response>
+      </Channel>
+      <Channel code="UDO" startDate="2016-07-13T00:00:00.000000Z" endDate="2020-08-05T15:06:00.000000Z" locationCode="10">
+        <Description>absolute_pressure, Seafloor Pressure</Description>
+        <Comment>
+          <Value>ATAPL-67639-00006</Value>
+          <BeginEffectiveTime>2016-07-13T00:00:00.000000Z</BeginEffectiveTime>
+        </Comment>
+        <Latitude unit="DEGREES">45.820222</Latitude>
+        <Longitude unit="DEGREES">-129.736393</Longitude>
+        <Elevation unit="METERS">-2610.0</Elevation>
+        <Depth unit="METERS">0.0</Depth>
+        <Azimuth unit="DEGREES">0.0</Azimuth>
+        <SampleRate>0.066667</SampleRate>
+        <Sensor>
+          <Description>Tidal Seafloor Pressure (Tsunameter 6,000 psia): PREST Series A</Description>
+        </Sensor>
+        <Response>
+          <InstrumentSensitivity>
+            <Value>1.0</Value>
+            <Frequency>1.0</Frequency>
+            <InputUnits>
+              <Name>PA</Name>
+              <Description>pascal</Description>
+            </InputUnits>
+            <OutputUnits>
+              <Name>PA</Name>
+              <Description>pascal</Description>
+            </OutputUnits>
+          </InstrumentSensitivity>
+          <Stage number="1" resourceId="ATAPL-67639-00006">
+            <PolesZeros name="Stage01">
+              <InputUnits>
+                <Name>PA</Name>
+                <Description>pascal</Description>
+              </InputUnits>
+              <OutputUnits>
+                <Name>PA</Name>
+                <Description>pascal</Description>
+              </OutputUnits>
+              <PzTransferFunctionType>DIGITAL (Z-TRANSFORM)</PzTransferFunctionType>
+              <NormalizationFactor>1.0</NormalizationFactor>
+              <NormalizationFrequency unit="HERTZ">1.0</NormalizationFrequency>
+            </PolesZeros>
+            <Decimation>
+              <InputSampleRate unit="HERTZ">0.066667</InputSampleRate>
+              <Factor>1</Factor>
+              <Offset>0</Offset>
+              <Delay unit="HERTZ">0.0</Delay>
+              <Correction unit="HERTZ">0.0</Correction>
+            </Decimation>
+            <StageGain>
+              <Value>1.0</Value>
+              <Frequency>1.0</Frequency>
+            </StageGain>
+          </Stage>
+        </Response>
+      </Channel>
+      <Channel code="UDO" startDate="2020-08-06T05:40:00.000000Z" endDate="2022-08-29T02:19:00.000000Z" locationCode="10">
+        <Description>absolute_pressure, Seafloor Pressure</Description>
+        <Comment>
+          <Value>ATAPL-67639-00003</Value>
+          <BeginEffectiveTime>2020-08-06T05:40:00.000000Z</BeginEffectiveTime>
+        </Comment>
+        <Latitude unit="DEGREES">45.820222</Latitude>
+        <Longitude unit="DEGREES">-129.736393</Longitude>
+        <Elevation unit="METERS">-2610.0</Elevation>
+        <Depth unit="METERS">0.0</Depth>
+        <Azimuth unit="DEGREES">0.0</Azimuth>
+        <SampleRate>0.066667</SampleRate>
+        <Sensor>
+          <Description>Tidal Seafloor Pressure (Tsunameter 6,000 psia): PREST Series A</Description>
+        </Sensor>
+        <Response>
+          <InstrumentSensitivity>
+            <Value>1.0</Value>
+            <Frequency>1.0</Frequency>
+            <InputUnits>
+              <Name>PA</Name>
+              <Description>pascal</Description>
+            </InputUnits>
+            <OutputUnits>
+              <Name>PA</Name>
+              <Description>pascal</Description>
+            </OutputUnits>
+          </InstrumentSensitivity>
+          <Stage number="1" resourceId="ATAPL-67639-00003">
+            <PolesZeros name="Stage01">
+              <InputUnits>
+                <Name>PA</Name>
+                <Description>pascal</Description>
+              </InputUnits>
+              <OutputUnits>
+                <Name>PA</Name>
+                <Description>pascal</Description>
+              </OutputUnits>
+              <PzTransferFunctionType>DIGITAL (Z-TRANSFORM)</PzTransferFunctionType>
+              <NormalizationFactor>1.0</NormalizationFactor>
+              <NormalizationFrequency unit="HERTZ">1.0</NormalizationFrequency>
+            </PolesZeros>
+            <Decimation>
+              <InputSampleRate unit="HERTZ">0.066667</InputSampleRate>
+              <Factor>1</Factor>
+              <Offset>0</Offset>
+              <Delay unit="HERTZ">0.0</Delay>
+              <Correction unit="HERTZ">0.0</Correction>
+            </Decimation>
+            <StageGain>
+              <Value>1.0</Value>
+              <Frequency>1.0</Frequency>
+            </StageGain>
+          </Stage>
+        </Response>
+      </Channel>
+      <Channel code="UDO" startDate="2022-08-30T01:37:00.000000Z" locationCode="10">
+        <Description>absolute_pressure, Seafloor Pressure</Description>
+        <Comment>
+          <Value>ATAPL-67639-00006</Value>
+          <BeginEffectiveTime>2022-08-30T01:37:00.000000Z</BeginEffectiveTime>
+        </Comment>
+        <Latitude unit="DEGREES">45.820222</Latitude>
+        <Longitude unit="DEGREES">-129.736393</Longitude>
+        <Elevation unit="METERS">-2610.0</Elevation>
+        <Depth unit="METERS">0.0</Depth>
+        <Azimuth unit="DEGREES">0.0</Azimuth>
+        <SampleRate>0.066667</SampleRate>
+        <Sensor>
+          <Description>Tidal Seafloor Pressure (Tsunameter 6,000 psia): PREST Series A</Description>
+        </Sensor>
+        <Response>
+          <InstrumentSensitivity>
+            <Value>1.0</Value>
+            <Frequency>1.0</Frequency>
+            <InputUnits>
+              <Name>PA</Name>
+              <Description>pascal</Description>
+            </InputUnits>
+            <OutputUnits>
+              <Name>PA</Name>
+              <Description>pascal</Description>
+            </OutputUnits>
+          </InstrumentSensitivity>
+          <Stage number="1" resourceId="ATAPL-67639-00006">
+            <PolesZeros name="Stage01">
+              <InputUnits>
+                <Name>PA</Name>
+                <Description>pascal</Description>
+              </InputUnits>
+              <OutputUnits>
+                <Name>PA</Name>
+                <Description>pascal</Description>
+              </OutputUnits>
+              <PzTransferFunctionType>DIGITAL (Z-TRANSFORM)</PzTransferFunctionType>
+              <NormalizationFactor>1.0</NormalizationFactor>
+              <NormalizationFrequency unit="HERTZ">1.0</NormalizationFrequency>
+            </PolesZeros>
+            <Decimation>
+              <InputSampleRate unit="HERTZ">0.066667</InputSampleRate>
+              <Factor>1</Factor>
+              <Offset>0</Offset>
+              <Delay unit="HERTZ">0.0</Delay>
+              <Correction unit="HERTZ">0.0</Correction>
+            </Decimation>
+            <StageGain>
+              <Value>1.0</Value>
+              <Frequency>1.0</Frequency>
+            </StageGain>
+          </Stage>
+        </Response>
+      </Channel>
+      <Channel code="UK1" startDate="2014-08-08T16:39:00.000000Z" endDate="2016-07-12T00:00:00.000000Z" locationCode="10">
+        <Description>pressure_temp, Pressure Sensor Internal Temperature</Description>
+        <Comment>
+          <Value>ATAPL-67639-00003</Value>
+          <BeginEffectiveTime>2014-08-08T16:39:00.000000Z</BeginEffectiveTime>
+        </Comment>
+        <Latitude unit="DEGREES">45.820222</Latitude>
+        <Longitude unit="DEGREES">-129.736393</Longitude>
+        <Elevation unit="METERS">-2610.0</Elevation>
+        <Depth unit="METERS">0.0</Depth>
+        <Azimuth unit="DEGREES">0.0</Azimuth>
+        <SampleRate>0.066667</SampleRate>
+        <Sensor>
+          <Description>Tidal Seafloor Pressure (Tsunameter 6,000 psia): PREST Series A</Description>
+        </Sensor>
+        <Response>
+          <InstrumentSensitivity>
+            <Value>1.0</Value>
+            <Frequency>1.0</Frequency>
+            <InputUnits>
+              <Name>C</Name>
+              <Description>degrees Celsius</Description>
+            </InputUnits>
+            <OutputUnits>
+              <Name>C</Name>
+              <Description>degrees Celsius</Description>
+            </OutputUnits>
+          </InstrumentSensitivity>
+          <Stage number="1" resourceId="ATAPL-67639-00003">
+            <PolesZeros name="Stage01">
+              <InputUnits>
+                <Name>C</Name>
+                <Description>degrees Celsius</Description>
+              </InputUnits>
+              <OutputUnits>
+                <Name>C</Name>
+                <Description>degrees Celsius</Description>
+              </OutputUnits>
+              <PzTransferFunctionType>DIGITAL (Z-TRANSFORM)</PzTransferFunctionType>
+              <NormalizationFactor>1.0</NormalizationFactor>
+              <NormalizationFrequency unit="HERTZ">1.0</NormalizationFrequency>
+            </PolesZeros>
+            <Decimation>
+              <InputSampleRate unit="HERTZ">0.066667</InputSampleRate>
+              <Factor>1</Factor>
+              <Offset>0</Offset>
+              <Delay unit="HERTZ">0.0</Delay>
+              <Correction unit="HERTZ">0.0</Correction>
+            </Decimation>
+            <StageGain>
+              <Value>1.0</Value>
+              <Frequency>1.0</Frequency>
+            </StageGain>
+          </Stage>
+        </Response>
+      </Channel>
+      <Channel code="UK1" startDate="2016-07-13T00:00:00.000000Z" endDate="2020-08-05T15:06:00.000000Z" locationCode="10">
+        <Description>pressure_temp, Pressure Sensor Internal Temperature</Description>
+        <Comment>
+          <Value>ATAPL-67639-00006</Value>
+          <BeginEffectiveTime>2016-07-13T00:00:00.000000Z</BeginEffectiveTime>
+        </Comment>
+        <Latitude unit="DEGREES">45.820222</Latitude>
+        <Longitude unit="DEGREES">-129.736393</Longitude>
+        <Elevation unit="METERS">-2610.0</Elevation>
+        <Depth unit="METERS">0.0</Depth>
+        <Azimuth unit="DEGREES">0.0</Azimuth>
+        <SampleRate>0.066667</SampleRate>
+        <Sensor>
+          <Description>Tidal Seafloor Pressure (Tsunameter 6,000 psia): PREST Series A</Description>
+        </Sensor>
+        <Response>
+          <InstrumentSensitivity>
+            <Value>1.0</Value>
+            <Frequency>1.0</Frequency>
+            <InputUnits>
+              <Name>C</Name>
+              <Description>degrees Celsius</Description>
+            </InputUnits>
+            <OutputUnits>
+              <Name>C</Name>
+              <Description>degrees Celsius</Description>
+            </OutputUnits>
+          </InstrumentSensitivity>
+          <Stage number="1" resourceId="ATAPL-67639-00006">
+            <PolesZeros name="Stage01">
+              <InputUnits>
+                <Name>C</Name>
+                <Description>degrees Celsius</Description>
+              </InputUnits>
+              <OutputUnits>
+                <Name>C</Name>
+                <Description>degrees Celsius</Description>
+              </OutputUnits>
+              <PzTransferFunctionType>DIGITAL (Z-TRANSFORM)</PzTransferFunctionType>
+              <NormalizationFactor>1.0</NormalizationFactor>
+              <NormalizationFrequency unit="HERTZ">1.0</NormalizationFrequency>
+            </PolesZeros>
+            <Decimation>
+              <InputSampleRate unit="HERTZ">0.066667</InputSampleRate>
+              <Factor>1</Factor>
+              <Offset>0</Offset>
+              <Delay unit="HERTZ">0.0</Delay>
+              <Correction unit="HERTZ">0.0</Correction>
+            </Decimation>
+            <StageGain>
+              <Value>1.0</Value>
+              <Frequency>1.0</Frequency>
+            </StageGain>
+          </Stage>
+        </Response>
+      </Channel>
+      <Channel code="UK1" startDate="2020-08-06T05:40:00.000000Z" endDate="2022-08-29T02:19:00.000000Z" locationCode="10">
+        <Description>pressure_temp, Pressure Sensor Internal Temperature</Description>
+        <Comment>
+          <Value>ATAPL-67639-00003</Value>
+          <BeginEffectiveTime>2020-08-06T05:40:00.000000Z</BeginEffectiveTime>
+        </Comment>
+        <Latitude unit="DEGREES">45.820222</Latitude>
+        <Longitude unit="DEGREES">-129.736393</Longitude>
+        <Elevation unit="METERS">-2610.0</Elevation>
+        <Depth unit="METERS">0.0</Depth>
+        <Azimuth unit="DEGREES">0.0</Azimuth>
+        <SampleRate>0.066667</SampleRate>
+        <Sensor>
+          <Description>Tidal Seafloor Pressure (Tsunameter 6,000 psia): PREST Series A</Description>
+        </Sensor>
+        <Response>
+          <InstrumentSensitivity>
+            <Value>1.0</Value>
+            <Frequency>1.0</Frequency>
+            <InputUnits>
+              <Name>C</Name>
+              <Description>degrees Celsius</Description>
+            </InputUnits>
+            <OutputUnits>
+              <Name>C</Name>
+              <Description>degrees Celsius</Description>
+            </OutputUnits>
+          </InstrumentSensitivity>
+          <Stage number="1" resourceId="ATAPL-67639-00003">
+            <PolesZeros name="Stage01">
+              <InputUnits>
+                <Name>C</Name>
+                <Description>degrees Celsius</Description>
+              </InputUnits>
+              <OutputUnits>
+                <Name>C</Name>
+                <Description>degrees Celsius</Description>
+              </OutputUnits>
+              <PzTransferFunctionType>DIGITAL (Z-TRANSFORM)</PzTransferFunctionType>
+              <NormalizationFactor>1.0</NormalizationFactor>
+              <NormalizationFrequency unit="HERTZ">1.0</NormalizationFrequency>
+            </PolesZeros>
+            <Decimation>
+              <InputSampleRate unit="HERTZ">0.066667</InputSampleRate>
+              <Factor>1</Factor>
+              <Offset>0</Offset>
+              <Delay unit="HERTZ">0.0</Delay>
+              <Correction unit="HERTZ">0.0</Correction>
+            </Decimation>
+            <StageGain>
+              <Value>1.0</Value>
+              <Frequency>1.0</Frequency>
+            </StageGain>
+          </Stage>
+        </Response>
+      </Channel>
+      <Channel code="UK1" startDate="2022-08-30T01:37:00.000000Z" locationCode="10">
+        <Description>pressure_temp, Pressure Sensor Internal Temperature</Description>
+        <Comment>
+          <Value>ATAPL-67639-00006</Value>
+          <BeginEffectiveTime>2022-08-30T01:37:00.000000Z</BeginEffectiveTime>
+        </Comment>
+        <Latitude unit="DEGREES">45.820222</Latitude>
+        <Longitude unit="DEGREES">-129.736393</Longitude>
+        <Elevation unit="METERS">-2610.0</Elevation>
+        <Depth unit="METERS">0.0</Depth>
+        <Azimuth unit="DEGREES">0.0</Azimuth>
+        <SampleRate>0.066667</SampleRate>
+        <Sensor>
+          <Description>Tidal Seafloor Pressure (Tsunameter 6,000 psia): PREST Series A</Description>
+        </Sensor>
+        <Response>
+          <InstrumentSensitivity>
+            <Value>1.0</Value>
+            <Frequency>1.0</Frequency>
+            <InputUnits>
+              <Name>C</Name>
+              <Description>degrees Celsius</Description>
+            </InputUnits>
+            <OutputUnits>
+              <Name>C</Name>
+              <Description>degrees Celsius</Description>
+            </OutputUnits>
+          </InstrumentSensitivity>
+          <Stage number="1" resourceId="ATAPL-67639-00006">
+            <PolesZeros name="Stage01">
+              <InputUnits>
+                <Name>C</Name>
+                <Description>degrees Celsius</Description>
+              </InputUnits>
+              <OutputUnits>
+                <Name>C</Name>
+                <Description>degrees Celsius</Description>
+              </OutputUnits>
+              <PzTransferFunctionType>DIGITAL (Z-TRANSFORM)</PzTransferFunctionType>
+              <NormalizationFactor>1.0</NormalizationFactor>
+              <NormalizationFrequency unit="HERTZ">1.0</NormalizationFrequency>
+            </PolesZeros>
+            <Decimation>
+              <InputSampleRate unit="HERTZ">0.066667</InputSampleRate>
+              <Factor>1</Factor>
+              <Offset>0</Offset>
+              <Delay unit="HERTZ">0.0</Delay>
+              <Correction unit="HERTZ">0.0</Correction>
+            </Decimation>
+            <StageGain>
+              <Value>1.0</Value>
+              <Frequency>1.0</Frequency>
+            </StageGain>
+          </Stage>
+        </Response>
+      </Channel>
+    </Station>
+  </Network>
+</FDSNStationXML>

@@ -30,8 +30,7 @@ PREST-data-collection/output/mseed2dmc/*
 !PREST-data-collection/output/mseed2dmc/.gitkeep
 
 # Output: never tracked (operator-generated, large, or generated locally)
-PREST-data-collection/output/temporal_anomaly/
-PREST-data-collection/output/xml/
+PREST-data-collection/output/temporal_anomaly/figures/per_day/*
 PREST-data-collection/output/netcdf/
 
 # Note: PREST-data-collection/output/metrics/ AND
