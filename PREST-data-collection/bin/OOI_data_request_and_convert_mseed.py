@@ -851,7 +851,7 @@ try:
                     }
                     
                     # Unit conversion to desired output units
-                    data_i_point = data_i_point / float(channel_param["r_value"][0])                   
+                    data_i_point = data_i_point / float(channel_param["conversion"][0])                   
 
                     # Set current time
                     # [CHATGPT FIX #4] Ensure ObsPy receives UTCDateTime, not string
