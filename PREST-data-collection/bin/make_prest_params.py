@@ -12,8 +12,8 @@ Conventions (kept in lockstep with coszo-data-collection/param):
   the pipeline converts the data to final units BEFORE writing MiniSEED.
   Pressure channels (UDO/LDO) carry conversion=0.0001450377: the pipeline
   divides raw PSI by it to get Pa (1 Pa = 0.0001450377 PSI), so the XML units
-  are PA/pascal. Temperature channels (UK1/LK1) are already degC and have no
-  conversion key (matching the hand-maintained set).
+  are PA/pascal. Temperature channels (UK1/LK1) are already degC and carry
+  conversion=1.0 so every channel can be divided by `conversion` uniformly.
 
 Deployment epochs, sensor UIDs, and coordinates were transcribed from the
 hand-maintained param files in coszo-data-collection/param (state of
@@ -42,12 +42,14 @@ PRESSURE = dict(
     desc="absolute_pressure, Seafloor Pressure",
     r_units="PA", r_desc="pascal",
     conversion="0.0001450377",
+    conv_note="For OOI data, this value is used to convert data units preferred by EarthScope; 0.0001450377 PSI --> 1 Pa",
 )
 TEMP = dict(
     var="pressure_temp",
     desc="pressure_temp, Pressure Sensor Internal Temperature",
     r_units="C", r_desc="degrees Celsius",
-    conversion=None,
+    conversion="1.0",
+    conv_note="Data already in output units; divide-by-1.0 keeps the pipeline uniform",
 )
 
 SENSOR_A = "Tidal Seafloor Pressure (Tsunameter 6,000 psia): PREST Series A"
@@ -212,9 +214,7 @@ def write_channel_file(st, c, out_dir):
         f.write(ln(f"c_sensor = {st['sensor']}", "Channel_sensor_description"))
         f.write(ln(f"c_id = {join(c['ids'])}", "Sensor(UID) per deployment"))
         f.write(ln("r_value = 1.0", "Response_Sensitivity_Value"))
-        if kind["conversion"]:
-            f.write(ln(f"conversion = {kind['conversion']}",
-                       "For OOI data, this value is used to convert data units preferred by EarthScope; 0.0001450377 PSI --> 1 Pa"))
+        f.write(ln(f"conversion = {kind['conversion']}", kind["conv_note"]))
         f.write(ln("r_frequency = 1.0", "Response_Sensitivity_Frequency"))
         f.write(ln(f"r_input_units = {kind['r_units']}", "Response_Sensitivity_Input_Units"))
         f.write(ln(f"r_input_description = {kind['r_desc']}", "Response_Sensitivity_Input_Units_description"))
