@@ -29,13 +29,13 @@ Deployment history per station, with the channels active during each deployment 
 
 Daily timing QC per station (`<station> - PREST`), from
 `PREST-data-collection/output/temporal_anomaly/metrics/*_variability.csv`. Regenerate with
-`python bin/temporal_anomaly_investigator.py --mode plot` and commit the PNGs (summary PNGs are
+`python bin/temporal_anomaly_investigator.py --mode plot` and `python bin/plot_dt_true_outliers.py`, and commit the PNGs (summary PNGs are
 tracked despite the `*.png` ignore rule — use `git add -f` for new ones) — this page always shows
 the committed versions.
 
-**Fitted true sample interval per day** (OLS Δt_true vs median first guess vs nominal)
+**Fitted true sample interval per day** (OLS Δt_true vs median first guess vs nominal; red lines = outlier days)
 
-![Fitted sample interval](PREST-data-collection/output/temporal_anomaly/figures/summary/fig1_dt_true.png)
+![Fitted sample interval](PREST-data-collection/output/temporal_anomaly/figures/summary/fig1_dt_true_outliers.png)
 
 **Timestamp jitter per day** (σ and max |residual|, ms)
 
