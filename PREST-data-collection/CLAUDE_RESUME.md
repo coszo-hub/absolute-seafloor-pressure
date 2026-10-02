@@ -41,11 +41,10 @@ Stream `prest_real_time` (in the OOI gold copy). Deployments current as of 2026-
   miniseed2dmc cursors removed. VM steps: `sea-water-velocity/VM_SEEDLINK_SETUP.md`.
 
 ## To do
-1. **Upload 2026-05-02 → 09-30 MiniSEED** to EarthScope once Dropoff is authorized
-   (account seismic@uw.edu; emailed data-submission@earthscope.org 2026-10-01). This repo
-   has no Dropoff script — copy `sea-water-velocity/VEL3D-data-collection/bin/dropoff_earthscope.sh`
-   (set MSEED_DIR to `/Volumes/COSZO/PREST/mseed2dmc`, `DROPOFF_PREFIX=prest`). PREST
-   StationXML was already sent — don't resend unless metadata changes.
+1. (DONE 2026-10-02) Uploaded 2026-05-02 → 09-30 MiniSEED: 914 files → Dropoff
+   `prest/mseed/2026/`, all AUTHORIZED; moved to `/Volumes/COSZO/PREST/mseed2dmc_sent/`.
+   StationXML not resent. Script: `bin/dropoff_earthscope.sh` (7bece8a + later sync with VEL3D):
+   `DROPOFF_MSEED_DIR=/Volumes/COSZO/PREST/mseed2dmc bin/dropoff_earthscope.sh mseed 2026 --archive`.
 2. **VM**: the VM agent installs the SeedLink setup (ring.conf MSeedScan for this repo's
    `output/mseed/`, combined crontab, `.ooi_env`, deploy key). The old PREST clone on the
    VM may still be named `Tidal-Seafloor-Pressure` — set `PREST=` in the cron block.

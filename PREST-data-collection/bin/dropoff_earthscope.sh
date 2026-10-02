@@ -30,7 +30,8 @@
 #   bin/dropoff_earthscope.sh list [prefix]        list uploaded objects (default prefix prest/)
 #   bin/dropoff_earthscope.sh history <key>        upload history for one object key
 #
-# Parallel uploads: DROPOFF_CONCURRENCY (default 16; es CLI default is 3).
+# Parallel uploads: DROPOFF_CONCURRENCY (default 16; es CLI default is 3) and
+# DROPOFF_PART_CONCURRENCY (default = DROPOFF_CONCURRENCY; es default 8).
 #
 # Destination layout in the dropoff space (override with DROPOFF_PREFIX):
 #   prest/mseed/<staged relative path>      e.g. prest/mseed/2026/OO.HYSB1.10.LDO...mseed
@@ -52,6 +53,9 @@ PREFIX="${DROPOFF_PREFIX:-prest}"
 # Files uploaded in parallel (es default 3). Hundreds of thousands of small
 # MiniSEED files upload much faster with more in flight.
 CONCURRENCY="${DROPOFF_CONCURRENCY:-16}"
+# Parts in flight across all objects (es default 8). Each small file is one
+# part, so this caps throughput too — keep it at least CONCURRENCY.
+PART_CONCURRENCY="${DROPOFF_PART_CONCURRENCY:-$CONCURRENCY}"
 LOG_DIR="$REPO_ROOT/log_dropoff"
 LOCK_FILE="$LOG_DIR/.dropoff.lock"
 
@@ -119,6 +123,10 @@ case "$mode" in
         SUB="${1:-}"; SUB="${SUB%/}"
         SRC_DIR="$MSEED_DIR${SUB:+/$SUB}"
         DEST="${PREFIX}/mseed/${SUB:+$SUB/}"
+        # One lock per SUBDIR: different years never share object keys, so they
+        # may upload side by side (each es process is capped at 10 S3
+        # connections, so running years in parallel is what adds throughput).
+        LOCK_FILE="$LOG_DIR/.dropoff${SUB:+_$SUB}.lock"
         [[ -d "$SRC_DIR" ]] || { log "mseed: $SRC_DIR not found — nothing to upload"; exit 0; }
         n_files=$(find -H "$SRC_DIR" -type f ! -name ".*" | wc -l | tr -d ' ')
         [[ "$n_files" -eq 0 ]] && { log "mseed: nothing staged in $SRC_DIR — exiting"; exit 0; }
@@ -127,8 +135,8 @@ case "$mode" in
             find -H "$SRC_DIR" -type f ! -name ".*" | sed "s|$MSEED_DIR/|  |"
             exit 0
         fi
-        # Single-instance guard: two concurrent uploads of the same staging
-        # tree would race on the same object keys.
+        # Single-instance guard (per SUBDIR): two concurrent uploads of the
+        # same tree would race on the same object keys.
         if ! mkdir "$LOCK_FILE" 2>/dev/null; then
             log "mseed: another dropoff run holds $LOCK_FILE — exiting"
             exit 1
@@ -144,7 +152,7 @@ case "$mode" in
         find -H "$SRC_DIR" -type f ! -name ".*" > "$manifest"
         n_manifest=$(wc -l < "$manifest" | tr -d ' ')
         log "mseed: uploading $n_manifest file(s) from $SRC_DIR to $DEST"
-        $ES dropoff upload -c miniseed -r --object-concurrency "$CONCURRENCY" \
+        $ES dropoff upload -c miniseed -r --object-concurrency "$CONCURRENCY" --part-concurrency "$PART_CONCURRENCY" \
             -s "$SRC_DIR/" -d "$DEST" 2>&1 | tee -a "$LOG_FILE" "$upload_out"
         log "mseed: upload command finished; verify with: $0 status"
         # `es dropoff upload` exits 0 even when SOME files fail its client-side
