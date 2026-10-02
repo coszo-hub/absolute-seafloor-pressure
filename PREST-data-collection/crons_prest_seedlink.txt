@@ -1,0 +1,36 @@
+# ======================================================================
+# PREST near-real-time (SeedLink) cron block — coszo VM
+#
+# The VM user has ONE crontab. Install this block TOGETHER with the VEL3D
+# block (sea-water-velocity/VEL3D-data-collection/crons_vel3d_seedlink.txt):
+#   crontab -l > ~/crontab.backup.$(date +%Y%m%d)
+#   cat <PREST>/crons_prest_seedlink.txt <VEL3D>/crons_vel3d_seedlink.txt | crontab -
+#   crontab -l
+# Full VM instructions: sea-water-velocity/VM_SEEDLINK_SETUP.md
+# Times are UTC.
+#
+# bin/run_daily_seedlink.sh <REFDES> - goldcopy: produces every day from its cursor
+# (run/endtime_<REFDES>_prest.txt) up to yesterday into output/mseed/ (flat) with the
+# backfill rules (used for PREST from 2026-05-02 on), appends the timing CSV row,
+# emails on problems, advances the cursor. ringserver's MSeedScan serves output/mseed/.
+# (Replaces the old M2M job bin/run_ooi_requests.sh <REFDES> prest seedlink.)
+# ======================================================================
+SHELL=/usr/bin/bash
+PATH=/home/coszo/miniconda3/bin:/usr/local/bin:/usr/bin:/bin
+# VM agent: set to the actual clone path of coszo-hub/absolute-seafloor-pressure
+# (older clones may still be named Tidal-Seafloor-Pressure)
+PREST=/home/coszo/absolute-seafloor-pressure/PREST-data-collection
+
+### Daily SeedLink jobs (17:50–17:55 UTC) ###
+50 17 * * * $PREST/bin/run_daily_seedlink.sh RS01SLBS-MJ01A-06-PRESTA101 - goldcopy >> $PREST/log/seedlink_HYSB1_$(/bin/date +\%Y\%m).log 2>&1
+52 17 * * * $PREST/bin/run_daily_seedlink.sh RS01SUM1-LJ01B-09-PRESTB102 - goldcopy >> $PREST/log/seedlink_HYS14_$(/bin/date +\%Y\%m).log 2>&1
+54 17 * * * $PREST/bin/run_daily_seedlink.sh RS03AXBS-MJ03A-06-PRESTA301 - goldcopy >> $PREST/log/seedlink_AXBA1_$(/bin/date +\%Y\%m).log 2>&1
+
+### Metadata check (18:20 UTC) ###
+20 18 * * * $PREST/bin/run_ooi_requests.sh all all seedlink > $PREST/log/OOI_metadata.log 2>&1
+### Stalled-job check (18:30 UTC) — emails if a run/endtime_*.txt cursor is >24 h old ###
+30 18 * * * $PREST/bin/detect.py > $PREST/log/system.log 2>&1
+### Push timing CSVs + regenerated summary figures to GitHub (18:40 UTC) ###
+40 18 * * * $PREST/bin/sync_metrics.sh
+### Housekeeping (19:05 UTC) ###
+5 19 * * *  $PREST/bin/cleanup_seedlink.sh

@@ -99,7 +99,7 @@ absolute-seafloor-pressure/
     ├── param/                     ← run_prest.txt, station + per-channel params
     ├── run/                       ← endtime_*.txt state (also marks where the
     │                                 historical local backfill should start)
-    ├── crons_prest_seedlink_and_mseed2dmc.txt
+    ├── crons_prest_seedlink.txt
     ├── save_results_to_test       ← operator helper
     ├── test/, testk/              ← tests / smoke-test scripts
     └── output/                    ← runtime working tree
@@ -113,16 +113,24 @@ absolute-seafloor-pressure/
 
 ### Live data — VM seedlink path
 
-The COSZO VM clones this repo and runs `crons_prest_seedlink_and_mseed2dmc.txt`:
+The COSZO VM runs the cron block `crons_prest_seedlink.txt` (installed together with the
+VEL3D block; full VM instructions in
+[`sea-water-velocity/VM_SEEDLINK_SETUP.md`](https://github.com/coszo-hub/sea-water-velocity/blob/main/VM_SEEDLINK_SETUP.md)):
 
 | Time (UTC) | Job |
 |---|---|
-| 18:01 / 18:06 / 18:11 | Seedlink fetch for SLBS / SUM1 / AXBS |
-| 18:16 | Metadata refresh |
-| 18:21 | Latency check |
-| 18:35 | `bin/sync_metrics.sh` — git push of `output/metrics/` and `output/diagnostics/` |
+| 17:50 / 17:52 / 17:54 | `bin/run_daily_seedlink.sh <REFDES> - goldcopy` for SLBS / SUM1 / AXBS |
+| 18:20 | Metadata refresh |
+| 18:30 | `bin/detect.py` — emails if a `run/endtime_*.txt` cursor stops moving |
+| 18:40 | `bin/sync_metrics.sh` — push timing CSVs, cursors, regenerated summary figures |
+| 19:05 | `bin/cleanup_seedlink.sh` — staged MiniSEED kept 7 days |
 
-Miniseed2dmc cron entries are commented out — historical backfill is local-only, see below.
+Each daily job produces every day from its cursor (`run/endtime_<REFDES>_prest.txt`) up to
+yesterday from the OOI gold copy, with the processing used for PREST from 2026-05-02 on
+(timing segmenting, OOI extra-record cleanup, 60 s minimum trace, timing-CSV row), writing
+flat into `output/mseed/` for ringserver's MSeedScan. Failed days retry automatically;
+`bin/daily_alerts.py` emails only when something needs attention. (The old M2M job,
+`run_ooi_requests.sh <REFDES> prest seedlink`, is retired but still in `bin/`.)
 
 ### Historical — local backfill
 
