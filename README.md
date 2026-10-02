@@ -25,6 +25,26 @@ Deployment history per station, with the channels active during each deployment 
 | `OO.AXBA1` | 3 | 2020-08-06 | 2022-08-29 | `UDO_10`, `UK1_10` | 15 s (0.0667 Hz) |
 | `OO.AXBA1` | 4 | 2022-08-30 | ongoing | `UDO_10`, `UK1_10` | 15 s (0.0667 Hz) |
 
+## Timing summary
+
+Daily timing QC per station (`<station> - PREST`), from
+`PREST-data-collection/output/temporal_anomaly/metrics/*_variability.csv`. Regenerate with
+`python bin/temporal_anomaly_investigator.py --mode plot` and commit the PNGs (summary PNGs are
+tracked despite the `*.png` ignore rule — use `git add -f` for new ones) — this page always shows
+the committed versions.
+
+**Fitted true sample interval per day** (OLS Δt_true vs median first guess vs nominal)
+
+![Fitted sample interval](PREST-data-collection/output/temporal_anomaly/figures/summary/fig1_dt_true.png)
+
+**Timestamp jitter per day** (σ and max |residual|, ms)
+
+![Timestamp jitter](PREST-data-collection/output/temporal_anomaly/figures/summary/fig2_jitter.png)
+
+**Gap count per day**
+
+![Gap count](PREST-data-collection/output/temporal_anomaly/figures/summary/fig3_gap_count.png)
+
 ## Data Access
 
 These stations are mirrored at the EarthScope/IRIS DMC, so raw waveforms are pulled
