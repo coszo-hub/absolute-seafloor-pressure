@@ -24,4 +24,4 @@ output/mseed_to_fix/*
 output/fix_chan_name_loc_code/*
 output/bad_mseed/*
 # full-file gold-copy downloads (OPeNDAP fallback) — scratch, safe to delete
-output/goldcopy_cache/
+output/goldcopy_cache
