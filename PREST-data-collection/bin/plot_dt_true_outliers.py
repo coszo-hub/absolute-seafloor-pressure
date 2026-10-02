@@ -17,6 +17,7 @@ import csv
 import datetime
 import math
 import os
+import sys
 from collections import defaultdict
 
 import matplotlib
@@ -105,6 +106,13 @@ def _filter_rows(rows, year=None):
     return [r for r in rows if r["date"].startswith(f"{year}-")]
 
 
+def _label(station):
+    """Readable panel title ('HYSB1 - PREST'), shared with the investigator."""
+    sys.path.insert(0, os.path.join(REPO_ROOT, "bin"))
+    from temporal_anomaly_investigator import series_label
+    return series_label(station)
+
+
 def render(out_dir, z_threshold, fg_threshold, year=None, suffix=""):
     per_station = {}
     for st in STATIONS:
@@ -147,7 +155,7 @@ def render(out_dir, z_threshold, fg_threshold, year=None, suffix=""):
             ax.axhline(sp, color=C_NOMINAL, linestyle=":", linewidth=1,
                        label=f"sp_nominal = {sp:.6f}s")
 
-        ax.set_title(st, fontweight="bold")
+        ax.set_title(_label(st), fontweight="bold")
         ax.set_ylabel("interval (s)")
         ax.legend(loc="best", fontsize=9, framealpha=0.9)
         ax.grid(alpha=0.3)
