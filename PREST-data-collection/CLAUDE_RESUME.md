@@ -7,10 +7,10 @@ VEL3D sibling, SeedLink design) is in
 
 ## Conventions
 - Git author Maleen Kidiwela; **no Claude/AI co-author trailers**. Short answers.
-- **PREST at EarthScope (checked 2026-10-05): 2014 → 2025-05-01 (sent earlier, old code —
-  do NOT reprocess/correct), then nothing until 2026-05-02 (our 10-02 upload).** The
-  investigator CSVs/figures run to 2026-05-01 (commit 1b7795e), which made that year look
-  sent — but no MiniSEED/send exists for **2025-05-02 → 2026-05-01**. OOI has full data then.
+- **PREST at EarthScope: 2014 → 2025-05-01 sent earlier with the old code — do NOT
+  reprocess/correct.** 2025-05-02 → 2026-09-30 made with the new code (gold copy) and
+  uploaded 2026-10-02/05. (The investigator CSVs ran to 2026-05-01 before any MiniSEED was
+  sent for 2025-05-02 → 2026-05-01 — that year was found missing and filled on 10-05.)
 
 ## Stations
 | SEED | OOI refdes | Rate | Channels (loc 10) |
@@ -47,17 +47,12 @@ Stream `prest_real_time` (in the OOI gold copy). Deployments current as of 2026-
    `prest/mseed/2026/`, all AUTHORIZED; moved to `/Volumes/COSZO/PREST/mseed2dmc_sent/`.
    StationXML not resent. Script: `bin/dropoff_earthscope.sh` (7bece8a + later sync with VEL3D):
    `DROPOFF_MSEED_DIR=/Volumes/COSZO/PREST/mseed2dmc bin/dropoff_earthscope.sh mseed 2026 --archive`.
-2. **Missing year 2025-05-02 → 2026-05-01 (all 3 stations)** — user plan (10-05): plug in
-   COSZO, make MiniSEED from the gold copy with the new code, upload. CSVs/figures stay as
-   they are (no `--variability` → MiniSEED only; it skips nothing):
-   ```
-   cd PREST-data-collection
-   python bin/backfill_mseed_from_nc.py --source goldcopy --start 2025-05-02 --end 2026-05-01 \
-       --segmenting timing --min-piece-seconds 60 --mseed-dir /Volumes/COSZO/PREST/mseed2dmc
-   DROPOFF_MSEED_DIR=/Volumes/COSZO/PREST/mseed2dmc bin/dropoff_earthscope.sh mseed 2025 --archive
-   DROPOFF_MSEED_DIR=/Volumes/COSZO/PREST/mseed2dmc bin/dropoff_earthscope.sh mseed 2026 --archive
-   ```
-   Then verify server count = local count, and dataselect returns 2025-06/2026-01 data.
+2. (DONE 2026-10-05) Missing year **2025-05-02 → 2026-05-01** made from the gold copy (new
+   code, MiniSEED only — CSVs untouched): HYSB1 364 days (2025-05-14 = real OOI gap),
+   HYS14 365, AXBA1 365 → 2,284 files (1.2 GB); sample totals match the CSV within 0.004%.
+   Uploaded → `prest/mseed/2025/` 1,522 + `prest/mseed/2026/` 762 (server 2026 total 1,676 =
+   local), all AUTHORIZED; moved to `/Volumes/COSZO/PREST/mseed2dmc_sent/`.
+   **PREST at EarthScope is now continuous 2014 → 2026-09-30** (except real OOI outages).
 3. **VM**: the VM agent installs the SeedLink setup (ring.conf MSeedScan for this repo's
    `output/mseed/`, combined crontab, `.ooi_env`, deploy key). The old PREST clone on the
    VM may still be named `Tidal-Seafloor-Pressure` — set `PREST=` in the cron block.
