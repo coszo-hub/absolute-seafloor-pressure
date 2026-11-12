@@ -26,3 +26,8 @@ output/bad_mseed/*
 # full-file gold-copy downloads (OPeNDAP fallback) — scratch, safe to delete
 output/goldcopy_cache
 log_dropoff/
+
+# near-real-time staging (daily_pipeline.sh), Dropoff archive, dropped-fragment logs
+output/mseed_pending/*
+output/mseed2dmc_sent/*
+output/outlier/*

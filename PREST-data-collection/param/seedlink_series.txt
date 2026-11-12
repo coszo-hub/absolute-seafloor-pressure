@@ -1,0 +1,5 @@
+# Series run by bin/daily_pipeline.sh, in order. stream "-" = single-stream (prest_real_time).
+# label     refdes                          stream  source
+HYSB1       RS01SLBS-MJ01A-06-PRESTA101     -       m2m
+HYS14       RS01SUM1-LJ01B-09-PRESTB102     -       m2m
+AXBA1       RS03AXBS-MJ03A-06-PRESTA301     -       m2m
