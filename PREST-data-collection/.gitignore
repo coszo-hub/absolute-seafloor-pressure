@@ -31,3 +31,4 @@ log_dropoff/
 output/mseed_pending/*
 output/mseed2dmc_sent/*
 output/outlier/*
+run/.lock_*

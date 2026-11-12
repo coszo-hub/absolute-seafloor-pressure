@@ -365,7 +365,7 @@ def fetch_nc_timestamps(station, start_dt, end_dt, deployment, run,
 
     # Deployment info
     dep_url      = "/".join([base_url, url_designator])
-    resp         = requests.get(dep_url, auth=(username, token))
+    resp         = requests.get(dep_url, auth=(username, token), timeout=(30, 300))
     resp.raise_for_status()
     _check_server_up(resp)
     dep_idx      = deployment - 1
@@ -384,7 +384,7 @@ def fetch_nc_timestamps(station, start_dt, end_dt, deployment, run,
         f"endDT={end_str}",
     ])
     print(f"  Data URL: {data_req[:120]}…")
-    resp = requests.get(data_req, auth=(username, token))
+    resp = requests.get(data_req, auth=(username, token), timeout=(30, 300))
     # OOI answers a genuinely empty window with HTTP 404 + JSON body
     # {"message": {"status": "No data for request"}} — check before raising.
     if "No data for request" in resp.text:
@@ -402,7 +402,7 @@ def fetch_nc_timestamps(station, start_dt, end_dt, deployment, run,
     t_req = time.monotonic()
     while True:
         time.sleep(poll_interval)
-        status = requests.get(status_url)
+        status = requests.get(status_url, timeout=(30, 120))
         waited = time.monotonic() - t_req
         if status.status_code == 200:
             print(f"    ready after {waited:.0f}s")
@@ -426,7 +426,7 @@ def fetch_nc_timestamps(station, start_dt, end_dt, deployment, run,
         f"-streamed-{stream_path}.ncml"
     )
     ncml_url = "/".join([response_url, ncml_name])
-    ncml     = urllib.request.urlopen(ncml_url)
+    ncml     = urllib.request.urlopen(ncml_url, timeout=300)
     root     = ET.ElementTree(file=ncml).getroot()
     ncml.close()
 
@@ -447,7 +447,7 @@ def fetch_nc_timestamps(station, start_dt, end_dt, deployment, run,
         local_nc = os.path.join(save_nc_dir, os.path.basename(netCDF))
         print(f"  Downloading NetCDF → {local_nc}")
         try:
-            with requests.get(http_nc_url, auth=(username, token), stream=True) as r:
+            with requests.get(http_nc_url, auth=(username, token), stream=True, timeout=(30, 300)) as r:
                 r.raise_for_status()
                 with open(local_nc, "wb") as f:
                     for chunk in r.iter_content(chunk_size=1 << 20):
